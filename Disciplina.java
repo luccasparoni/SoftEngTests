@@ -15,7 +15,7 @@ public class Disciplina {
         this.codigo = codigo;
     }
 
-    public void adicionarEstudante(String nusp, float p1, float p2, float p3)
+    public void adicionarEstudante(String nusp, Float p1, Float p2, Float p3)
     {
         Estudante estudante = new Estudante(nusp, p1, p2, p3);
         this.estudantesMatriculados.add(estudante);
@@ -45,5 +45,24 @@ public class Disciplina {
     {
         Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny().orElse(null);
         return String.format("P1: %d, P2: %d, P3: %d", estudante.getNotaP1(), estudante.getNotaP2(), estudante.getNotaP3());
+    }
+
+    public String getAlunosENotas()
+    {
+        //checar se esta ordenando descendentemente
+        this.estudantesMatriculados.sort((obj1, obj2) -> obj1.getNuspAsInteger().compareTo(obj2.getNuspAsInteger()));
+
+        String stringResultado = new String(); 
+        for (Estudante estudante : this.estudantesMatriculados) {
+            String stringToAdd = String.format("NUSP: %s, P1: %d, P2: %d, P3: %d", 
+                                        estudante.getNusp(), 
+                                        estudante.getNotaP1(), 
+                                        estudante.getNotaP2(), 
+                                        estudante.getNotaP3());
+
+            stringResultado.concat(stringToAdd + "\n"); 
+        } 
+        
+        return stringResultado;
     }
 }

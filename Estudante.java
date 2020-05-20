@@ -1,8 +1,8 @@
 public class Estudante {
     private String nusp;
-    private float p1, p2, p3;
+    private Float p1, p2, p3;
 
-    public Estudante(String nusp, float p1, float p2, float p3)
+    public Estudante(String nusp, Float p1, Float p2, Float p3)
     {
         setNusp(nusp);
         this.p1 = p1;
@@ -10,17 +10,17 @@ public class Estudante {
         this.p3 = p3;
     }
 
-    public float getNotaP1()
+    public Float getNotaP1()
     {
         return this.p1;
     }
 
-    public float getNotaP2()
+    public Float getNotaP2()
     {
         return this.p2;
     }
 
-    public float getNotaP3()
+    public Float getNotaP3()
     {
         return this.p3;
     }
@@ -33,7 +33,7 @@ public class Estudante {
         this.nusp = nusp;
     }
 
-    public float calculaMedia() {
+    public Float calculaMedia() {
         return (this.p1 + this.p2 + this.p3) / 3;
     }
 
@@ -43,5 +43,9 @@ public class Estudante {
 
     public String getNusp() {
         return this.nusp;
+    }
+
+    public Integer getNuspAsInteger() {
+        return new Integer(this.nusp);
     }
 }
