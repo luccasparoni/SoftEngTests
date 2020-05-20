@@ -1,5 +1,5 @@
 public class Estudante {
-    private char[7]nusp;
+    private char[7] nusp;
     private float p1, p2, p3;
 
     public Estudante(char[7] nusp, float p1, float p2, float p3)
@@ -10,12 +10,12 @@ public class Estudante {
         this.p3 = p3;
     }
 
-    public float CalculaMedia() {
+    public float calculaMedia() {
         return (this.p1 + this.p2 + this.p3) / 3;
     }
 
-    public boolean Aprovado() {
-        return this.CalculaMedia() >= 5;
+    public boolean isAprovado() {
+        return this.calculaMedia() >= 5;
     }
 
     public String getNusp() {
