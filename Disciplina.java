@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.regex.*;  
-
 public class Disciplina {
-    private String Codigo;
+    private String codigo;
     private ArrayList<Estudante> estudantesMatriculados;
 
     public Disciplina(String codigo) {
@@ -10,7 +7,7 @@ public class Disciplina {
         this.estudantesMatriculados = new ArrayList<Estudante>();
     }
 
-    public setDisciplina(String codigo)
+    public void setDisciplina(String codigo)
     {
         Pattern padrao = Pattern.compile("[A-Z]{3}\\d{4}");
         if(!padrao.matcher(codigo).matches())
@@ -18,30 +15,35 @@ public class Disciplina {
         this.codigo = codigo;
     }
 
-    public adicionarEstudante(char[7] nusp, float p1, float p2, float p3)
+    public void adicionarEstudante(String nusp, float p1, float p2, float p3)
     {
         Estudante estudante = new Estudante(nusp, p1, p2, p3);
         this.estudantesMatriculados.add(estudante);
     }
 
-    public getMatriculados()
+    public Integer getMatriculados()
     {
         return this.estudantesMatriculados.size();
     }
 
-    public getAprovados()
+    public List<Estudante> getAprovados()
     {
-        return estudantesMatriculados.stream().filter(p -> p.isAprovado() == true);
+        return this.estudantesMatriculados.stream().filter(p -> p.isAprovado() == true).collect(Collectors.toList());
     }
 
-    public getReprovados()
+    public List<Estudante> getReprovados()
     {
-        return estudantesMatriculados.stream().filter(p -> p.isAprovado() == false);
+        return this.estudantesMatriculados.stream().filter(p -> p.isAprovado() == false).collect(Collectors.toList());
     }
 
-    public getEstudante(String nusp)
+    public Estudante getEstudante(String nusp)
     {
-        return estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp);
+        return this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny().orElse(null);
     }
 
+    public String getNotasEstudante(String nusp)
+    {
+        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny().orElse(null);
+        return String.format("P1: %d, P2: %d, P3: %d", estudante.getNotaP1(), estudante.getNotaP2(), estudante.getNotaP3());
+    }
 }
