@@ -2,33 +2,44 @@ public class Estudante {
     private String nusp;
     private Float p1, p2, p3;
 
-    public Estudante(String nusp, Float p1, Float p2, Float p3)
-    {
+    public Estudante(String nusp, Float p1, Float p2, Float p3) {
         setNusp(nusp);
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
     }
 
-    public Float getNotaP1()
-    {
+    public Estudante(String nusp) {
+        setNusp(nusp);
+        this.p1 = 0;
+        this.p2 = 0;
+        this.p3 = 0;
+    }
+
+    public void addNota(String prova, Float nota) {
+        if (prova == "P1")
+            this.p1 = nota;
+        if (prova == "P2")
+            this.p2 = nota;
+        if (prova == "P3")
+            this.p3 = nota;
+    }
+
+    public Float getNotaP1() {
         return this.p1;
     }
 
-    public Float getNotaP2()
-    {
+    public Float getNotaP2() {
         return this.p2;
     }
 
-    public Float getNotaP3()
-    {
+    public Float getNotaP3() {
         return this.p3;
     }
-    
-    private void setNusp(String nusp)
-    {
+
+    private void setNusp(String nusp) {
         Pattern padrao = Pattern.compile("\\d{7}");
-        if(!padrao.matcher(nusp).matches())
+        if (!padrao.matcher(nusp).matches())
             throw new Error("Numero USP inválido. Deve conter 7 dígitos (ex: '0000123')");
         this.nusp = nusp;
     }
@@ -47,5 +58,10 @@ public class Estudante {
 
     public Integer getNuspAsInteger() {
         return new Integer(this.nusp);
+    }
+
+    @Override
+    public String toString() {
+        return super.nusp.toString();
     }
 }
