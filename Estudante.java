@@ -11,9 +11,9 @@ public class Estudante {
 
     public Estudante(String nusp) {
         setNusp(nusp);
-        this.p1 = 0;
-        this.p2 = 0;
-        this.p3 = 0;
+        this.p1 = new Float(0.0);
+        this.p2 = new Float(0.0);
+        this.p3 = new Float(0.0);
     }
 
     public void addNota(String prova, Float nota) {
@@ -62,6 +62,6 @@ public class Estudante {
 
     @Override
     public String toString() {
-        return super.nusp.toString();
+        return this.nusp;
     }
 }
