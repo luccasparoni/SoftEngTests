@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Disciplina {
     private String codigo;
@@ -50,7 +53,7 @@ public class Disciplina {
     }
 
     // Função de adicionar um estudante à disciplina
-    public void adicionarEstudante(String nusp, Float p1, Float p2, Float p3) {
+    public void adicionarEstudante(String nusp, Double p1, Double p2, Double p3) {
         Estudante estudante = new Estudante(nusp, p1, p2, p3);
         this.estudantesMatriculados.add(estudante);
     }

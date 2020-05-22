@@ -1,8 +1,10 @@
+import java.util.regex.Pattern;
+
 public class Estudante {
     private String nusp;
-    private Float p1, p2, p3;
+    private Double p1, p2, p3;
 
-    public Estudante(String nusp, Float p1, Float p2, Float p3) {
+    public Estudante(String nusp, Double p1, Double p2, Double p3) {
         setNusp(nusp);
         this.p1 = p1;
         this.p2 = p2;
@@ -11,29 +13,30 @@ public class Estudante {
 
     public Estudante(String nusp) {
         setNusp(nusp);
-        this.p1 = new Float(0.0);
-        this.p2 = new Float(0.0);
-        this.p3 = new Float(0.0);
+        this.p1 = 0.00;
+        this.p2 = 0.00;
+        this.p3 = 0.00;
     }
 
-    public void addNota(String prova, Float nota) {
+    public int addNota(String prova, Double nota) {
         if (prova == "P1")
             this.p1 = nota;
         if (prova == "P2")
             this.p2 = nota;
         if (prova == "P3")
             this.p3 = nota;
+        return 0;
     }
 
-    public Float getNotaP1() {
+    public Double getNotaP1() {
         return this.p1;
     }
 
-    public Float getNotaP2() {
+    public Double getNotaP2() {
         return this.p2;
     }
 
-    public Float getNotaP3() {
+    public Double getNotaP3() {
         return this.p3;
     }
 
@@ -44,7 +47,7 @@ public class Estudante {
         this.nusp = nusp;
     }
 
-    public Float calculaMedia() {
+    public Double calculaMedia() {
         return (this.p1 + this.p2 + this.p3) / 3;
     }
 
@@ -57,7 +60,7 @@ public class Estudante {
     }
 
     public Integer getNuspAsInteger() {
-        return new Integer(this.nusp);
+        return Integer.parseInt(this.nusp);
     }
 
     @Override
