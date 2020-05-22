@@ -7,26 +7,22 @@ public class Disciplina {
     private String codigo;
     private ArrayList<Estudante> estudantesMatriculados;
 
-    enum Status {
-        APROVADOS, REPROVADOS, TODOS
-    };
-
     // Função de criação de disciplina
     public Disciplina(String codigo) {
-        this.codigo = this.setDisciplina(codigo);
+        this.setDisciplina(codigo);
         this.estudantesMatriculados = new ArrayList<Estudante>();
     }
 
     // Funções de Apoio
-    private List<Estudante> listAprovados() {
+    public List<Estudante> listAprovados() {
         return this.estudantesMatriculados.stream().filter(p -> p.isAprovado() == true).collect(Collectors.toList());
     }
 
-    private List<Estudante> listReprovados() {
+    public List<Estudante> listReprovados() {
         return this.estudantesMatriculados.stream().filter(p -> p.isAprovado() == false).collect(Collectors.toList());
     }
 
-    private String formataListaEstudantes(List<Estudante> estudantes, boolean media) {
+    public String formataListaEstudantes(List<Estudante> estudantes, boolean media) {
         StringBuilder alunosFormatados = new StringBuilder();
         for (Estudante e : estudantes) {
             alunosFormatados.append("NUSP:" + e.getNusp() + "\t");
@@ -45,11 +41,11 @@ public class Disciplina {
     }
 
     // Função de adição de disciplina
-    public String setDisciplina(String codigo) throws Error {
+    public void setDisciplina(String codigo) throws Error {
         Pattern padrao = Pattern.compile("[A-Z]{3}\\d{4}");
         if (!padrao.matcher(codigo).matches())
             throw new Error("Código de disciplina inválido. Deve conter 3 letras e 4 dígitos (ex: 'SCC0620')");
-        return codigo;
+        this.codigo = codigo;
     }
 
     // Função de adicionar um estudante à disciplina
