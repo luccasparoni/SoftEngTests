@@ -45,7 +45,7 @@ public class Disciplina {
     }
 
     // Função de adição de disciplina
-    public String setDisciplina(String codigo) {
+    public String setDisciplina(String codigo) throws Error {
         Pattern padrao = Pattern.compile("[A-Z]{3}\\d{4}");
         if (!padrao.matcher(codigo).matches())
             throw new Error("Código de disciplina inválido. Deve conter 3 letras e 4 dígitos (ex: 'SCC0620')");
