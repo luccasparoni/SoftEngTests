@@ -41,7 +41,9 @@ public class Disciplina {
     }
 
     public Estudante getEstudante(String nusp) {
-        return this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny().orElse(null);
+        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp().equals(nusp)).findFirst()
+                .orElse(null);
+        return estudante;
     }
 
     // Função de adição de disciplina
@@ -74,7 +76,7 @@ public class Disciplina {
     }
 
     public String getNotasEstudante(String nusp) {
-        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny()
+        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp().equals(nusp)).findAny()
                 .orElse(null);
         return String.format("P1: %d, P2: %d, P3: %d", estudante.getNotaP1(), estudante.getNotaP2(),
                 estudante.getNotaP3());

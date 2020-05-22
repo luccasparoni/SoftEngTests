@@ -95,12 +95,12 @@ public class Main {
         Double p3 = Double.parseDouble(Main.lerComando());
         disciplina.adicionarEstudante(nusp, p1, p2, p3);
         System.out.println("Estudante Adicionado! Deseja adicionar outro estudante?\n \t" + ANSI_BLUE + "\t1."
-                + ANSI_RESET + "Sim\n" + ANSI_BLUE + "\t2." + ANSI_RESET + "Não\n");
+                + ANSI_RESET + "Sim\n" + ANSI_BLUE + "\t\t2." + ANSI_RESET + "Não\n");
         String comando = lerComando();
         if (comando.equals("1"))
             Main.AdicionarAlunos();
         else
-            Main.imprimeMenuAdicionar();
+            Main.imprimeMenuInicial();
     }
 
     public static void imprimeMenuBuscar() {
@@ -126,12 +126,13 @@ public class Main {
             break;
         case "2":
             Integer aprovados = disciplina.getQtdeAprovados();
-            System.out.println(ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET + aprovados.toString());
+            System.out.println(
+                    ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET + aprovados.toString() + "\n\n");
             break;
         case "3":
             Integer reprovados = disciplina.getQtdeReprovados();
-            System.out
-                    .println(ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET + reprovados.toString());
+            System.out.println(
+                    ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET + reprovados.toString() + "\n\n");
             break;
         case "4":
             Main.buscaAluno();
@@ -147,9 +148,13 @@ public class Main {
         case "7":
             String listaReprovados = disciplina.getReprovados();
             System.out.println("\n\n" + listaReprovados);
+            break;
         case "8":
             String listaAprovados = disciplina.getAprovados();
             System.out.println("\n\n" + listaAprovados);
+            break;
+        case "0":
+            Main.imprimeMenuInicial();
         default:
             System.out.println(ANSI_RED + "\tComando Inválido! Tente novamente!\n");
             break;
@@ -159,10 +164,12 @@ public class Main {
 
     public static void buscaAluno() {
         System.out.println("\t Qual é o numero usp do aluno que você deseja obter as notas?");
-        String nusp = Main.lerComando();
+        String nusp = Main.lerComando().toString();
         Estudante estudante = disciplina.getEstudante(nusp);
-        if (estudante == null)
-            System.out.println(ANSI_RED + "\t Aluno não encontrado! Tente novamente!\n");
+        if (estudante == null) {
+            System.out.println(ANSI_RED + "\t Aluno não encontrado! Tente novamente!\n" + ANSI_RESET);
+            Main.buscaAluno();
+        }
         System.out.println(
                 "\t\tSobre o estudante de número usp: " + ANSI_GREEN + nusp + " Obtemos as seguintes informações:");
         System.out.println("\n\t\tP1: " + estudante.getNotaP1().toString());
