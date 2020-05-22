@@ -37,13 +37,15 @@ public class Disciplina {
     }
 
     public Estudante getEstudante(String nusp) {
-        return this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny().orElse(null);
+        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp().equals(nusp)).findFirst()
+                .orElse(null);
+        return estudante;
     }
 
     // Função de adição de disciplina
     public void setDisciplina(String codigo) throws Error {
         Pattern padrao = Pattern.compile("[A-Z]{3}\\d{4}");
-        if (!padrao.matcher(codigo).matches())
+        if (!padrao.matcher(codigo.toUpperCase()).matches())
             throw new Error("Código de disciplina inválido. Deve conter 3 letras e 4 dígitos (ex: 'SCC0620')");
         this.codigo = codigo;
     }
@@ -70,7 +72,7 @@ public class Disciplina {
     }
 
     public String getNotasEstudante(String nusp) {
-        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp() == nusp).findAny()
+        Estudante estudante = this.estudantesMatriculados.stream().filter(p -> p.getNusp().equals(nusp)).findAny()
                 .orElse(null);
         return String.format("P1: %d, P2: %d, P3: %d", estudante.getNotaP1(), estudante.getNotaP2(),
                 estudante.getNotaP3());
@@ -100,4 +102,3 @@ public class Disciplina {
         return this.formataListaEstudantes(reprovados, true);
     }
 }
-
