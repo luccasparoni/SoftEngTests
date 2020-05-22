@@ -40,11 +40,12 @@ public class Estudante {
         return this.p3;
     }
 
-    private void setNusp(String nusp) {
+    private int setNusp(String nusp) {
         Pattern padrao = Pattern.compile("\\d{7}");
         if (!padrao.matcher(nusp).matches())
             throw new Error("Numero USP inválido. Deve conter 7 dígitos (ex: '0000123')");
         this.nusp = nusp;
+        return 0;
     }
 
     public Double calculaMedia() {
