@@ -12,7 +12,7 @@ public class Disciplina {
     };
 
     // Função de criação de disciplina
-    public Disciplina(String codigo) {
+    public Disciplina(String codigo) throws Error {
         this.codigo = this.setDisciplina(codigo);
         this.estudantesMatriculados = new ArrayList<Estudante>();
     }
@@ -45,11 +45,11 @@ public class Disciplina {
     }
 
     // Função de adição de disciplina
-    public String setDisciplina(String codigo) {
+    public String setDisciplina(String codigo) throws Error {
         Pattern padrao = Pattern.compile("[A-Z]{3}\\d{4}");
-        if (!padrao.matcher(codigo).matches())
+        if (!padrao.matcher(codigo.toUpperCase()).matches())
             throw new Error("Código de disciplina inválido. Deve conter 3 letras e 4 dígitos (ex: 'SCC0620')");
-        return codigo;
+        return codigo.toUpperCase();
     }
 
     // Função de adicionar um estudante à disciplina
@@ -104,4 +104,3 @@ public class Disciplina {
         return this.formataListaEstudantes(reprovados, true);
     }
 }
-
