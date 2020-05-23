@@ -22,6 +22,7 @@ public class Main {
             Main.iniciaPrograma();
         } catch (Exception e) {
             System.out.println(ANSI_RED + e.toString());
+            disciplina = null;
             Main.iniciaPrograma();
         }
 
@@ -100,7 +101,12 @@ public class Main {
         Double p1 = Double.parseDouble(Main.lerComando());
         Double p2 = Double.parseDouble(Main.lerComando());
         Double p3 = Double.parseDouble(Main.lerComando());
-        disciplina.adicionarEstudante(nusp, p1, p2, p3);
+        try {
+            disciplina.adicionarEstudante(nusp, p1, p2, p3);
+        } catch (Error e) {
+            System.out.println("Estudante não adicionado! Notas inválidas\n \t");
+            Main.imprimeMenuInicial();
+        }
         System.out.println("Estudante Adicionado! Deseja adicionar outro estudante?\n \t" + ANSI_BLUE + "\t1."
                 + ANSI_RESET + "Sim\n" + ANSI_BLUE + "\t\t2." + ANSI_RESET + "Não\n");
         String comando = lerComando();
@@ -173,13 +179,13 @@ public class Main {
         }
     }
 
-    public static void buscaAluno() {
+    public static Estudante buscaAluno() {
         System.out.println("\t Qual é o numero usp do aluno que você deseja obter as notas?");
         String nusp = Main.lerComando().toString();
         Estudante estudante = disciplina.getEstudante(nusp);
         if (estudante == null) {
             System.out.println(ANSI_RED + "\t Aluno não encontrado! Tente novamente!\n" + ANSI_RESET);
-            Main.buscaAluno();
+            return null;
         }
         System.out.println(
                 "\t\tSobre o estudante de número usp: " + ANSI_GREEN + nusp + "\nObtemos as seguintes informações:");
@@ -187,7 +193,7 @@ public class Main {
         System.out.println("\n\t\tP2: " + estudante.getNotaP2().toString());
         System.out.println("\n\t\tP3: " + estudante.getNotaP3().toString());
         System.out.println("\n\t\tMedia: " + estudante.calculaMedia().toString());
-        return;
+        return estudante;
     }
 
 }
