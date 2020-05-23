@@ -31,7 +31,7 @@ public class EstudanteTests {
     /* Teste unitário: caso nUsp válido */
     @Test
     public void casoTeste13() {
-        Estudante teste = new Estudante("9876300");
+        Estudante teste = new Estudante("9876310");
         assertNotNull(teste);
     }
 
