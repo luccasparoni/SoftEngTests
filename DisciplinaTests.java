@@ -17,6 +17,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso codigo disciplina -> 7 chars (3 letras e 4 numeros) */
     public void casoTeste1() throws NoSuchFieldException, IllegalAccessException {
         disciplina.setDisciplina("SSC0620");
         final Field fieldCodigo = disciplina.getClass().getDeclaredField("codigo");
@@ -25,6 +26,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso codigo disciplina -> !3 letras */
     public void casoTeste2() {
         assertThrows(Error.class, () -> {
             disciplina.setDisciplina("SS60620");
@@ -32,6 +34,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso codigo disciplina -> 4 numeros */
     public void casoTeste3() {
         assertThrows(Error.class, () -> {
             disciplina.setDisciplina("SSC0C20");
@@ -39,6 +42,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso codigo disciplina -> !3letras e !4 numeros e !7 chars */
     public void casoTeste4() {
         assertThrows(Error.class, () -> {
             disciplina.setDisciplina("S2C");
@@ -46,6 +50,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso codigo disciplina -> !3letras e !4 numeros e !7 chars */
     public void casoTeste5() {
         assertThrows(Error.class, () -> {
             disciplina.setDisciplina("");
@@ -141,6 +146,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso lista de estudantes -> contem um estudante valido */
     public void casoTeste6() {
         ArrayList<Estudante> estudantes = new ArrayList<Estudante>();
         estudantes.add(new Estudante("0000000", 5.0, 5.0, 5.0));
@@ -156,6 +162,7 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso lista de estudantes -> contem conteudo nulo */
     public void casoTeste7() { // ERROR!
         ArrayList<Estudante> estudantes = new ArrayList<Estudante>();
         assertThrows(Error.class, () -> {
