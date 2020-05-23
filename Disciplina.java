@@ -23,6 +23,9 @@ public class Disciplina {
     }
 
     public String formataListaEstudantes(List<Estudante> estudantes, boolean media) {
+        if (estudantes == null || estudantes.isEmpty())
+            throw new Error("Não há nenhum estudante cadastrado na disciplina.");
+
         StringBuilder alunosFormatados = new StringBuilder();
         for (Estudante e : estudantes) {
             alunosFormatados.append("NUSP:" + e.getNusp() + "\t");

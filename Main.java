@@ -22,6 +22,8 @@ public class Main {
             Main.iniciaPrograma();
         } catch (Exception e) {
             System.out.println(ANSI_RED + e.toString());
+            disciplina = null;
+            Main.iniciaPrograma();
         }
 
     }
@@ -52,8 +54,14 @@ public class Main {
         String comando = Main.lerComando();
         if (comando.contains("1"))
             Main.imprimeMenuAdicionar();
-        else if (comando.contains("2"))
-            Main.imprimeMenuBuscar();
+        else if (comando.contains("2")) {
+            try {
+                Main.imprimeMenuBuscar();
+            } catch (Exception e) {
+                System.out.println(ANSI_RED + e.getMessage());
+            }
+        }
+
         else {
             System.out.println(ANSI_RED + "\tComando Inválido! Tente novamente!\n");
             Main.imprimeMenuInicial();
@@ -74,26 +82,31 @@ public class Main {
         System.out.println(ANSI_BLUE + "\t0." + ANSI_RESET + "Retornar ao menu inicial\n");
         String comando = lerComando();
         switch (comando) {
-        case "1":
-            Main.AdicionarAlunos();
-            break;
-        case "0":
-            Main.imprimeMenuInicial();
-            break;
-        default:
-            break;
+            case "1":
+                Main.AdicionarAlunos();
+                break;
+            case "0":
+                Main.imprimeMenuInicial();
+                break;
+            default:
+                break;
         }
     }
 
     public static void AdicionarAlunos() {
         System.out.println(
-                "\t\t Para adicionar um aluno, digite o número usp, e as notas referentes à P1, P2 e P3 no formato: \n"
-                        + ANSI_CYAN + "\t\t1234567 2.0 5.0 6.0");
+                "\tPara adicionar um aluno, digite o número usp, e as notas referentes à P1, P2 e P3 no formato: \n"
+                        + ANSI_CYAN + "\t1234567 2.0 5.0 6.0");
         String nusp = Main.lerComando();
         Double p1 = Double.parseDouble(Main.lerComando());
         Double p2 = Double.parseDouble(Main.lerComando());
         Double p3 = Double.parseDouble(Main.lerComando());
-        disciplina.adicionarEstudante(nusp, p1, p2, p3);
+        try {
+            disciplina.adicionarEstudante(nusp, p1, p2, p3);
+        } catch (Error e) {
+            System.out.println("Estudante não adicionado! Notas inválidas\n \t");
+            Main.imprimeMenuInicial();
+        }
         System.out.println("Estudante Adicionado! Deseja adicionar outro estudante?\n \t" + ANSI_BLUE + "\t1."
                 + ANSI_RESET + "Sim\n" + ANSI_BLUE + "\t\t2." + ANSI_RESET + "Não\n");
         String comando = lerComando();
@@ -119,64 +132,68 @@ public class Main {
 
         String comando = Main.lerComando();
         switch (comando) {
-        case "1":
-            Integer matriculados = disciplina.getQtdeMatriculados();
-            System.out.println(
-                    ANSI_YELLOW + "\t\tQuantidade de alunos matriculados:" + ANSI_RESET + matriculados.toString());
-            break;
-        case "2":
-            Integer aprovados = disciplina.getQtdeAprovados();
-            System.out.println(
-                    ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET + aprovados.toString() + "\n\n");
-            break;
-        case "3":
-            Integer reprovados = disciplina.getQtdeReprovados();
-            System.out.println(
-                    ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET + reprovados.toString() + "\n\n");
-            break;
-        case "4":
-            Main.buscaAluno();
-            break;
-        case "5":
-            String estudantes = disciplina.getEstudantesPorNusp();
-            System.out.println(estudantes);
-            break;
-        case "6":
-            String estudantesPorMedia = disciplina.getEstudantesPorMedia();
-            System.out.println(estudantesPorMedia);
-            break;
-        case "7":
-            String listaReprovados = disciplina.getReprovados();
-            System.out.println("\n\n" + listaReprovados);
-            break;
-        case "8":
-            String listaAprovados = disciplina.getAprovados();
-            System.out.println("\n\n" + listaAprovados);
-            break;
-        case "0":
-            Main.imprimeMenuInicial();
-        default:
-            System.out.println(ANSI_RED + "\tComando Inválido! Tente novamente!\n");
-            break;
+            case "1":
+                Integer matriculados = disciplina.getQtdeMatriculados();
+                System.out.println(
+                        ANSI_YELLOW + "\t\tQuantidade de alunos matriculados:" + ANSI_RESET + matriculados.toString());
+                break;
+            case "2":
+                Integer aprovados = disciplina.getQtdeAprovados();
+                System.out.println(ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET
+                        + aprovados.toString() + "\n\n");
+                break;
+            case "3":
+                Integer reprovados = disciplina.getQtdeReprovados();
+                System.out.println(ANSI_YELLOW + "\t\tQuantidade de alunos aprovados:" + ANSI_RESET
+                        + reprovados.toString() + "\n\n");
+                break;
+            case "4":
+                Main.buscaAluno();
+                break;
+            case "5":
+                String estudantes = disciplina.getEstudantesPorNusp();
+                System.out.println(estudantes);
+                break;
+            case "6":
+                String estudantesPorMedia = disciplina.getEstudantesPorMedia();
+                System.out.println(estudantesPorMedia);
+                break;
+            case "7":
+                String listaReprovados = disciplina.getReprovados();
+                System.out.println("\n\n" + listaReprovados);
+                break;
+            case "8":
+                String listaAprovados = disciplina.getAprovados();
+                System.out.println("\n\n" + listaAprovados);
+                break;
+            case "0":
+                Main.imprimeMenuInicial();
+            default:
+                System.out.println(ANSI_RED + "\tComando Inválido! Tente novamente!\n");
+                break;
         }
-        Main.imprimeMenuBuscar();
+        try {
+            Main.imprimeMenuBuscar();
+        } catch (Exception e) {
+            System.out.println(ANSI_RED + e.getMessage());
+        }
     }
 
-    public static void buscaAluno() {
+    public static Estudante buscaAluno() {
         System.out.println("\t Qual é o numero usp do aluno que você deseja obter as notas?");
         String nusp = Main.lerComando().toString();
         Estudante estudante = disciplina.getEstudante(nusp);
         if (estudante == null) {
             System.out.println(ANSI_RED + "\t Aluno não encontrado! Tente novamente!\n" + ANSI_RESET);
-            Main.buscaAluno();
+            return null;
         }
         System.out.println(
-                "\t\tSobre o estudante de número usp: " + ANSI_GREEN + nusp + " Obtemos as seguintes informações:");
+                "\t\tSobre o estudante de número usp: " + ANSI_GREEN + nusp + "\nObtemos as seguintes informações:");
         System.out.println("\n\t\tP1: " + estudante.getNotaP1().toString());
         System.out.println("\n\t\tP2: " + estudante.getNotaP2().toString());
         System.out.println("\n\t\tP3: " + estudante.getNotaP3().toString());
         System.out.println("\n\t\tMedia: " + estudante.calculaMedia().toString());
-        return;
+        return estudante;
     }
 
 }
