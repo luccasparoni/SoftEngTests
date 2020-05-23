@@ -99,17 +99,19 @@ public class EstudanteTests {
     /* Teste unitário: caso nota inválido -> fora do intervalo */
     @Test
     public void casoTeste16() {
-        assertThrows(Error.class, () -> {
-            estudante.addNota("P1", -15.3);
-        });
+        assertThrows(Error.class, () -> { estudante.addNota("P1", -15.3); });
     }
 
     /* Teste unitário: caso nota inválido -> fora do intervalo */
     @Test
     public void casoTeste8() {
-        assertThrows(Error.class, () -> {
-            estudante.addNota("P2", 11.0);
-        });
+        assertThrows(Error.class, () -> { estudante.addNota("P2", 11.0); });
+    }
+
+    /* Teste unitário: caso nota inválido -> fora do intervalo */
+    @Test
+    public void casoTeste9() {
+        assertThrows(Error.class, () -> { estudante.addNota("P3", 105.0); });
     }
 
     /* Teste unitário: caso nota inválido -> fora do intervalo */
