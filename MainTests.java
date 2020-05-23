@@ -76,7 +76,7 @@ public class MainTests {
 }
 
 class MainStub extends Main {
-
+    //linhas comentados para evidenciar igualdade com os métodos da classe Main
     public static void iniciaDisciplina(String aula) throws Error {
         System.out.println(ANSI_WHITE + "\tPara iniciar a utilização deste programa, digite o código da disciplina\n");
 
