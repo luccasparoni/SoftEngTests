@@ -86,6 +86,7 @@ class MainStub extends Main {
             return;
         } catch (Error e) {
             System.out.println(ANSI_RED + e.getMessage());
+            disciplina = null;
         }
     }
 
@@ -97,7 +98,13 @@ class MainStub extends Main {
         Double p1 = Double.parseDouble(nota1);
         Double p2 = Double.parseDouble(nota2);
         Double p3 = Double.parseDouble(nota3);
-        disciplina.adicionarEstudante(nusp, p1, p2, p3);
+        try {
+            disciplina.adicionarEstudante(nusp, p1, p2, p3);
+        } catch (Error e) {
+            System.out.println("Estudante não adicionado! Notas inválidas\n \t");
+            //Main.imprimeMenuInicial();
+            return;
+        }
         System.out.println("Estudante Adicionado! Deseja adicionar outro estudante?\n \t" + ANSI_BLUE + "\t1."
                 + ANSI_RESET + "Sim\n" + ANSI_BLUE + "\t\t2." + ANSI_RESET + "Não\n");
         String comando = addOutro;
@@ -114,6 +121,7 @@ class MainStub extends Main {
         Estudante estudante = disciplina.getEstudante(nusp);
         if (estudante == null) {
             System.out.println(ANSI_RED + "\t Aluno não encontrado! Tente novamente!\n" + ANSI_RESET);
+            return null;
             //Main.buscaAluno();
         }
         
