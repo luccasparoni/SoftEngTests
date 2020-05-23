@@ -28,6 +28,13 @@ public class EstudanteTests {
         assertNotNull(teste);
     }
 
+    /* Teste unitário: caso nUsp válido */
+    @Test
+    public void casoTeste13 () {
+        Estudante teste = new Estudante("987630");
+        assertNotNull(teste);
+    }
+
     /* Teste unitário: caso nUsp inválido -> letra */
     @Test
     @DisplayName("Teste1")
@@ -67,6 +74,20 @@ public class EstudanteTests {
         assertEquals(0, erro);
     }
 
+    /* Teste unitário: caso nota válido */
+    @Test
+    public void casoTeste14() {
+        int erro = estudante.addNota("P3", 7.5);
+        assertEquals(0, erro);
+    }
+
+    /* Teste unitário: caso nota válido */
+    @Test
+    public void casoTeste15() {
+        int erro = estudante.addNota("P3", 2.5);
+        assertEquals(0, erro);
+    }
+
     /* Teste unitário: caso nota inválido -> fora do intervalo */
     @Test
     public void casoTeste7() {
@@ -77,10 +98,20 @@ public class EstudanteTests {
 
     /* Teste unitário: caso nota inválido -> fora do intervalo */
     @Test
+    public void casoTeste16() {
+        assertThrows(Error.class, () -> { estudante.addNota("P1", -15.3); });
+    }
+
+    /* Teste unitário: caso nota inválido -> fora do intervalo */
+    @Test
     public void casoTeste8() {
-        assertThrows(Error.class, () -> {
-            estudante.addNota("P2", 11.0);
-        });
+        assertThrows(Error.class, () -> { estudante.addNota("P2", 11.0); });
+    }
+
+    /* Teste unitário: caso nota inválido -> fora do intervalo */
+    @Test
+    public void casoTeste9() {
+        assertThrows(Error.class, () -> { estudante.addNota("P3", 105.0); });
     }
 
     /* Teste unitário: caso valores válidos para média */
