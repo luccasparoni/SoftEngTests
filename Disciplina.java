@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class Disciplina {
     private String codigo;
-    private ArrayList<Estudante> estudantesMatriculados;
+    public ArrayList<Estudante> estudantesMatriculados;
 
     // Função de criação de disciplina
     public Disciplina(String codigo) {
