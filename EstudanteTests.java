@@ -30,7 +30,7 @@ public class EstudanteTests {
 
     /* Teste unitário: caso nUsp válido */
     @Test
-    public void casoTeste13 () {
+    public void casoTeste13() {
         Estudante teste = new Estudante("9876310");
         assertNotNull(teste);
     }
@@ -112,6 +112,14 @@ public class EstudanteTests {
     @Test
     public void casoTeste9() {
         assertThrows(Error.class, () -> { estudante.addNota("P3", 105.0); });
+    }
+
+    /* Teste unitário: caso nota inválido -> fora do intervalo */
+    @Test
+    public void casoTeste9() {
+        assertThrows(Error.class, () -> {
+            estudante.addNota("P3", 105.0);
+        });
     }
 
     /* Teste unitário: caso valores válidos para média */
