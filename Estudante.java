@@ -4,8 +4,10 @@ public class Estudante {
     private String nusp;
     private Double p1, p2, p3;
 
-    public Estudante(String nusp, Double p1, Double p2, Double p3) {
+    public Estudante(String nusp, Double p1, Double p2, Double p3) throws Error {
         setNusp(nusp);
+        if (p1 > 10 || p1 < 0 || p2 > 10 || p2 < 0 || p3 > 10 || p3 < 0)
+            throw new Error("Nota inválida! As notas devem estar entre 0 e 10.0");
         this.p1 = p1;
         this.p2 = p2;
         this.p3 = p3;
@@ -18,7 +20,9 @@ public class Estudante {
         this.p3 = 0.00;
     }
 
-    public int addNota(String prova, Double nota) {
+    public int addNota(String prova, Double nota) throws Error {
+        if (nota > 10 || nota < 0)
+            throw new Error("Nota inválida! As notas devem estar entre 0 e 10.0");
         if (prova == "P1")
             this.p1 = nota;
         if (prova == "P2")
