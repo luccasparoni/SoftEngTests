@@ -26,6 +26,15 @@ public class DisciplinaTests {
     }
 
     @Test
+    /* Teste unitário: caso codigo disciplina -> 7 chars (3 letras e 4 numeros) */
+    public void casoTeste8() throws NoSuchFieldException, IllegalAccessException {
+        disciplina.setDisciplina("ABZ0099");
+        final Field fieldCodigo = disciplina.getClass().getDeclaredField("codigo");
+        fieldCodigo.setAccessible(true);
+        assertEquals("ABZ0099", fieldCodigo.get(disciplina));
+    }
+
+    @Test
     /* Teste unitário: caso codigo disciplina -> !3 letras */
     public void casoTeste2() {
         assertThrows(Error.class, () -> {
